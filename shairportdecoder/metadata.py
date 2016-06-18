@@ -7,7 +7,7 @@ logger = logging.getLogger(__name__)
 from hashlib import sha256
 import xml.etree.ElementTree as xml
 from DictObject import DictObject
-from luckydonaldUtils.files import open_file_folder, guess_extension
+#from luckydonaldUtils.files import open_file_folder, guess_extension
 from luckydonaldUtils.encoding import to_unicode, to_binary
 from luckydonaldUtils.xml import etree_to_dict
 from luckydonaldUtils import py2, py3
