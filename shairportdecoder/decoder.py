@@ -3,6 +3,8 @@ from luckydonaldUtils.encoding import unicode_type
 from luckydonaldUtils.logger import logging
 from shairportdecoder.metadata import Infos, Item, CoverArt
 
+import sys
+
 __author__ = 'luckydonald'
 
 logger = logging.getLogger(__name__)
@@ -46,7 +48,10 @@ class Processor(object):
 		if item.type == "ssnc":
 			if item.code == "PICT":  # the payload is a picture, either a JPEG or a PNG. Check the first few bytes to see which.
 				self.info.songcoverart = CoverArt(binary=item.data, base64=item.data_base64)  # this is not base64, but raw.
-				self._trigger_update_event(COVERART)
+				if sys.getsizeof(self.info.songcoverart.binary) > 0 :
+					self._trigger_update_event(COVERART)
+				else:
+					print("NO PICT FOUND")
 			elif item.code == "mdst":  # -- a sequence of metadata is about to start
 				self._trigger_update_event(META_START)
 				#
